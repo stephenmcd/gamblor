@@ -48,7 +48,6 @@ $(function() {
                         args[args.length] = field.value;
                 }
             });
-            form.reset();
             socket.emit('bet', game, amount, args);
             return false;
         });
