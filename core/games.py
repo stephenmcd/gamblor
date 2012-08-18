@@ -10,6 +10,7 @@ ROULETTE_CHOICES = range(0, 37)
 CRAP_WINS = (7, 11)
 CRAP_LOSES = (2, 3, 12)
 
+
 class Roulette(Game):
     """
     Simplified Roulette - we can only bet on single numbers, not groups.
