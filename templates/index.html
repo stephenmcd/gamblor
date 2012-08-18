@@ -1,3 +1,28 @@
+<!doctype html>
+<html lang="en">
+{% load i18n %}
+
+<head>
+
+<title>{% trans "Gamblor" %}</title>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+
+<link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.spacelab.css">
+<link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.responsive.css">
+<link rel="stylesheet" href="{{ STATIC_URL }}css/gamblor.css">
+
+<script src="{{ STATIC_URL }}js/jquery.min.js"></script>
+<script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+<script src="{{ STATIC_URL }}js/json2.js"></script>
+<script src="{{ STATIC_URL }}js/socket.io.min.js"></script>
+<script src="{{ STATIC_URL }}js/jquery-collision.js"></script>
+<script src="{{ STATIC_URL }}js/gamblor.js"></script>
+
+</head>
+
+<body>
+<div class="container">
 
 {% for message in messages %}
 <p>{{ message }}</p>
@@ -8,3 +33,7 @@ Logged in as {{ request.user }} <a href="{% url logout %}">Logout</a>
 {% else %}
 <a href="{% url socialauth_begin "twitter" %}">Login via Twitter</a>
 {% endif %}
+
+</div>
+</body>
+</html>
