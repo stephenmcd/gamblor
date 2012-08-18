@@ -55,10 +55,9 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.staticfiles',
-
     'compressor',
     'social_auth',
-
+    'core',
 )
 
 try:
@@ -83,9 +82,8 @@ FACEBOOK_APP_ID          = ""
 FACEBOOK_API_SECRET      = ""
 FACEBOOK_EXTENDED_PERMISSIONS = ["offline_access"]
 
-LOGIN_URL          = '/auth/login/'
-LOGIN_REDIRECT_URL = '/auth/loggedin/'
-LOGIN_ERROR_URL    = '/auth/error/'
+LOGIN_REDIRECT_URL = '/'
+LOGIN_ERROR_URL    = '/?error'
 
 COMPRESS = True
 COMPRESS_OUTPUT_DIR = "cache"
