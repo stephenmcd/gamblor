@@ -8,6 +8,14 @@ from django.utils.translation import ugettext_lazy as _
 def index(request):
     return render(request, "index.html", {})
 
+def logged_in(request):
+    info(request, _("Logged in as %s" % request.user))
+    return redirect("index")
+
+def login_error(request):
+    error(request, _("An error occurred logging in"))
+    return redirect("index")
+
 def logout(request):
     auth_logout(request)
     info(request, _("Successfully logged out"))

@@ -82,8 +82,8 @@ FACEBOOK_APP_ID          = ""
 FACEBOOK_API_SECRET      = ""
 FACEBOOK_EXTENDED_PERMISSIONS = ["offline_access"]
 
-LOGIN_REDIRECT_URL = '/'
-LOGIN_ERROR_URL    = '/?error'
+LOGIN_REDIRECT_URL = '/logged_in/'
+LOGIN_ERROR_URL    = '/login_error/'
 
 COMPRESS = True
 COMPRESS_OUTPUT_DIR = "cache"
