@@ -1,8 +1,10 @@
 
 from random import randint
 
+from django.contrib.auth.models import User
 from gevent import sleep, spawn
 
+from core.forms import GameForm
 from core.settings import BETTING_PERIOD
 
 
@@ -14,6 +16,7 @@ class GameBase(type):
     Whenever Game is subclassed, add a new game instance to the registry.
     """
     def __new__(cls, name, bases, attrs):
+        attrs.setdefault("Form", GameForm)
         new = super(GameBase, cls).__new__(cls, name, bases, attrs)
         name = name.lower()
         if name != "game":
@@ -32,6 +35,7 @@ class Game(object):
     __metaclass__ = GameBase
 
     def __init__(self, name):
+        self.form = self.__class__.Form()
         self.name = name
         self.reset()
 
