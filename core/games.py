@@ -1,5 +1,5 @@
 
-from random import randint
+from random import choice, randint
 
 from django.contrib.auth.models import User
 from gevent import sleep, spawn
@@ -20,6 +20,8 @@ class GameBase(type):
         new = super(GameBase, cls).__new__(cls, name, bases, attrs)
         name = name.lower()
         if name != "game":
+            if name != "dummy":
+                del game_registry["dummy"]
             game_registry[name] = new(name)
         return new
 
@@ -28,7 +30,7 @@ class Game(object):
     """
     Base class for games. Subclasses should override the bet()
     method to perform validation of game specific betting args,
-    and the won() method, which receives each player's betting
+    and the outcome() method, which receives each player's betting
     args and returns True if the args perform a win.
     """
 
@@ -55,7 +57,7 @@ class Game(object):
         their bet.
         """
         if not self.players:
-            spawn(self.play)
+            spawn(self.turn)
         user_id = namespace.user["id"]
         self.players.setdefault(user_id, {"amount": 0})
         self.players[user_id]["namespace"] = namespace
@@ -63,27 +65,26 @@ class Game(object):
         self.players[user_id]["bet_args"] = bet_args
         return True
 
-    def play(self):
+    def turn(self):
         """
         Takes an actual turn of the game - called within a separate
         greenlet on the first call to bet(). We iterate through each of
-        the players passing their bet_args to won(), and build a
-        results dict we can broadcast back to all sockets. We piggyback
-        the first player we find that's still connected, to broadcast
-        the results back.
+        the players passing their bet_args to outcome() which multiplies
+        the amount bet, and build a results dict we can broadcast back
+        to all sockets. We piggyback the first player we find that's
+        still connected, to broadcast the results back.
         """
         sleep(BETTING_PERIOD)
         broadcaster = None
         results = {}
         for user_id, player in self.players.items():
-            results[user_id] = player["amount"]
-            if self.won(player["bet_args"]):
-                # Put double the bet amount back into the user's account.
+            result = self.outcome(player["bet_args"])
+            results[user_id] = player["amount"] * result
+            if results[user_id] > 0:
+                # Put a positive bet amount back into the user's account.
                 user = User.objects.get(id=user_id)
                 user.account.balance += (results[user_id] * 2)
                 user.account.save()
-            else:
-                results[user_id] *= -1
             if broadcaster is None and player["namespace"].socket.connected:
                 broadcaster = player["namespace"]
         if broadcaster is not None:
@@ -96,5 +97,6 @@ class Game(object):
 
 class Dummy(Game):
 
-    def won(self, bet_args):
-        return randint(0, 1)
+    def outcome(self, bet_args):
+        # Give back 0 (lose), 1 (even) or 2 (win) times the bet.
+        return randint(0, 2)
