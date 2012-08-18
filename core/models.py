@@ -10,13 +10,15 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from social_auth.signals import socialauth_registered
 
+from core.settings import DEFAULT_BALANCE
+
 
 class Account(models.Model):
     """
     A user's account balance.
     """
     user = models.OneToOneField(User)
-    balance = models.IntegerField(default=5000)
+    balance = models.IntegerField(default=DEFAULT_BALANCE)
 
 
 @receiver(post_save, sender=User)
@@ -24,7 +26,7 @@ def user_saved(sender, **kwargs):
     """
     Create an initial account balance for new users.
     """
-    Account.objects.get_or_create(user=kwargs["instance"])
+    account = Account.objects.get_or_create(user=kwargs["instance"])
 
 
 @receiver(socialauth_registered, sender=None)
