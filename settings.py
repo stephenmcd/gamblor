@@ -68,6 +68,28 @@ except ImportError:
 else:
     INSTALLED_APPS += ('django_extensions',)
 
+MESSAGE_STORAGE = "django.contrib.messages.storage.cookie.CookieStorage"
+
+AUTHENTICATION_BACKENDS = (
+    'social_auth.backends.twitter.TwitterBackend',
+    'social_auth.backends.facebook.FacebookBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+# Set these in local_settings.py
+TWITTER_CONSUMER_KEY     = ""
+TWITTER_CONSUMER_SECRET  = ""
+FACEBOOK_APP_ID          = ""
+FACEBOOK_API_SECRET      = ""
+FACEBOOK_EXTENDED_PERMISSIONS = ["offline_access"]
+
+LOGIN_URL          = '/auth/login/'
+LOGIN_REDIRECT_URL = '/auth/loggedin/'
+LOGIN_ERROR_URL    = '/auth/error/'
+
+COMPRESS = True
+COMPRESS_OUTPUT_DIR = "cache"
+
 try:
     from local_settings import *
 except ImportError:
