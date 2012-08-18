@@ -4,7 +4,7 @@ from django.contrib.messages import info, error
 from django.shortcuts import render, redirect
 from django.utils.translation import ugettext_lazy as _
 
-from core.games import game_registry
+from core.game import game_registry
 
 
 def index(request):

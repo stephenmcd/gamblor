@@ -12,7 +12,7 @@ from socketio.mixins import BroadcastMixin
 from socketio.namespace import BaseNamespace
 from redis import Redis, ConnectionPool
 
-from core.games import game_registry
+from core.game import game_registry
 
 
 redis = Redis(connection_pool=ConnectionPool())
