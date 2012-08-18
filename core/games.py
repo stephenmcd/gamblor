@@ -2,6 +2,7 @@
 from random import choice, randint
 
 from django.contrib.auth.models import User
+from django import forms
 from gevent import sleep, spawn
 
 from core.forms import GameForm
@@ -78,7 +79,7 @@ class Game(object):
         broadcaster = None
         results = {}
         for user_id, player in self.players.items():
-            result = self.outcome(player["bet_args"])
+            result = self.outcome(*player["bet_args"])
             results[user_id] = player["amount"] * result
             if results[user_id] > 0:
                 # Put a positive bet amount back into the user's account.
@@ -96,7 +97,26 @@ class Game(object):
 
 
 class Dummy(Game):
-
-    def outcome(self, bet_args):
+    """
+    Default game with no input - just randomly win lose or draw.
+    If any other games are registered, this one is removed.
+    """
+    def outcome(self):
         # Give back 0 (lose), 1 (even) or 2 (win) times the bet.
         return randint(0, 2)
+
+
+ROULETTE_CHOICES = range(0, 37)
+
+
+class Roulette(Game):
+
+    class Form(GameForm):
+        number = forms.ChoiceField(choices=[(c, c) for c in ROULETTE_CHOICES])
+
+    def turn(self):
+        self.landed_on = str(choice(ROULETTE_CHOICES))
+        super(Roulette, self).turn()
+
+    def outcome(self, choice):
+        return (choice == self.landed_on) * len(ROULETTE_CHOICES)
