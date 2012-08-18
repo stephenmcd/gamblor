@@ -122,6 +122,7 @@ class Roulette(Game):
 
     def turn(self):
         self.landed_on = str(choice(ROULETTE_CHOICES))
+        self.broadcast("roulette_landed_on", self.landed_on)
         super(Roulette, self).turn()
 
     def outcome(self, choice):
