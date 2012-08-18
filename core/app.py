@@ -62,7 +62,8 @@ class Game(object):
         greenlet on the first call to bet(). We iterate through each of
         the players passing their betting_args to won(), and build a
         results dict we can broadcast back to all sockets. We piggyback
-        the first player we find that's still connected.
+        the first player we find that's still connected, to broadcast
+        the results back.
         """
         sleep(BETTING_PERIOD)
         broadcaster = None
