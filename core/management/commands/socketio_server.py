@@ -11,5 +11,3 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         game.autodiscover()
         SocketIOServer(("0.0.0.0", 9000), Application()).serve_forever()
-
-

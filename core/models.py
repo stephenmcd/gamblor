@@ -26,7 +26,7 @@ def user_saved(sender, **kwargs):
     """
     Create an initial account balance for new users.
     """
-    account = Account.objects.get_or_create(user=kwargs["instance"])
+    Account.objects.get_or_create(user=kwargs["instance"])
 
 
 @receiver(socialauth_registered, sender=None)
@@ -41,7 +41,8 @@ def avatar(sender, user, response, details, **kwargs):
         photo_url = "_reasonably_small".join(photo_url.rsplit("_normal", 1))
     except KeyError:
         # facebook
-        photo_url = "http://graph.facebook.com/%s/picture?type=large" % response["id"]
+        uid = response["id"]
+        photo_url = "http://graph.facebook.com/%s/picture?type=large" % uid
     path = join(settings.MEDIA_ROOT, "photos")
     if not exists(path):
         makedirs(path)

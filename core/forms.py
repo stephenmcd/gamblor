@@ -16,4 +16,3 @@ class GameForm(forms.Form):
                 self.fields[name].widget.input_type = "number"
             if field.required:
                 self.fields[name].widget.attrs["required"] = ""
-
