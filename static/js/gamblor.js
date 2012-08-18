@@ -23,17 +23,17 @@ $(function() {
     });
 
     socket.on('game_users', function(game, users) {
-        console.log('users for game ', game, users);
+        var text = users.length > 0 ? 'Players: ' + users.join(', ') : '';
+        $('.game-' + game + ' .players').html(text);
     });
 
-    socket.on('game_end', function(game, users) {
-        console.log('game ended ', game, users);
+    socket.on('game_end', function(game, results) {
+        $('.game-' + game + ' .players').html('');
     });
 
     socket.emit('start');
 
     $('.game form').each(function(i, form) {
-        form = $(form);
         $(form).submit(function() {
             var game, amount, args = [];
             $.each($(form).serializeArray(), function(i, field) {
@@ -48,6 +48,7 @@ $(function() {
                         args[args.length] = field.value;
                 }
             });
+            form.reset();
             socket.emit('bet', game, amount, args);
             return false;
         });

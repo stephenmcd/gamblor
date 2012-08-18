@@ -39,6 +39,7 @@ Logged in as {{ request.user }} with ${{ request.user.account.balance }} <a href
 
 {% for game in games %}
 <div class="game game-{{ game.name }}">
+    <p class="players"></p>
     <a href="#">{{ game.name }}</a>
     {% if request.user.is_authenticated %}
     <form>
