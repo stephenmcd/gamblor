@@ -88,6 +88,12 @@ class Game(object):
                 player["namespace"].broadcast_event(*args)
                 break
 
+    def pause(self):
+        """
+        Pause for settings.BETTING_PERIOD - used to simulate dice roll,
+        wheel spin, etc.
+        """
+        sleep(BETTING_PERIOD)
 
     def turn(self):
         """
@@ -97,7 +103,7 @@ class Game(object):
         the amount bet, and build a results dict we can broadcast back
         to all sockets.
         """
-        sleep(BETTING_PERIOD)
+        self.pause()
         results = {}
         for user_id, player in self.players.items():
             result = self.outcome(*player["bet_args"])
