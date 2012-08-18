@@ -44,7 +44,6 @@ $(function() {
     socket.on('chat', function(user, message) {
         if ($('.messages li').length == 10) {
             $('.messages li:last').remove();
-
         }
         $('.messages').prepend('<li>' + user.name + ': ' + message + '</li>');
     });

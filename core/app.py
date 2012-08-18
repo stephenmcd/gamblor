@@ -18,7 +18,7 @@ from core.game import game_registry
 redis = Redis(connection_pool=ConnectionPool())
 
 
-class GamblorNamespace(BaseNamespace, BroadcastMixin):
+class GameNamespace(BaseNamespace, BroadcastMixin):
     """
     Per-user socket.io namespace for event handlers.
     """
@@ -85,14 +85,14 @@ class GamblorNamespace(BaseNamespace, BroadcastMixin):
             self.broadcast_event("game_users", game_name, game.players.keys())
 
 
-class Application(object):
+class GameApplication(object):
     """
     Standard socket.io wsgi application.
     """
 
     def __call__(self, environ, start_response):
         if environ["PATH_INFO"].startswith("/socket.io/"):
-            socketio_manage(environ, {"": GamblorNamespace})
+            socketio_manage(environ, {"": GameNamespace})
         else:
             start_response('404 Not Found', [])
             return ['<h1>Not Found</h1>']
