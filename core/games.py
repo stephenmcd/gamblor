@@ -72,7 +72,7 @@ class Game(object):
         broadcast a message.
         """
         for player in self.players.values():
-            if player["namespace"].socket.connected
+            if player["namespace"].socket.connected:
                 player["namespace"].broadcast_event(*args)
                 break
 
