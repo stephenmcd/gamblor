@@ -1,3 +1,8 @@
+
+{% for message in messages %}
+<p>{{ message }}</p>
+{% endfor %}
+
 {% if request.user.is_authenticated %}
 Logged in as {{ request.user }} <a href="{% url logout %}">Logout</a>
 {% else %}
