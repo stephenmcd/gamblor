@@ -18,6 +18,9 @@
 <script src="{{ STATIC_URL }}js/socket.io.min.js"></script>
 <script src="{{ STATIC_URL }}js/jquery-collision.js"></script>
 <script src="{{ STATIC_URL }}js/gamblor.js"></script>
+{% for game in games %}
+<script src="{{ STATIC_URL }}js/games/{{ game.name }}.js"></script>
+{% endfor %}
 
 </head>
 
@@ -33,6 +36,10 @@ Logged in as {{ request.user }} with ${{ request.user.account.balance }} <a href
 {% else %}
 <a href="{% url socialauth_begin "twitter" %}">Login via Twitter</a>
 {% endif %}
+
+{% for game in games %}
+<div class="game game-{{ game.name }}"><a href="#">{{ game.name }}</a></div>
+{% endfor %}
 
 </div>
 </body>

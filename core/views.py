@@ -4,9 +4,11 @@ from django.contrib.messages import info, error
 from django.shortcuts import render, redirect
 from django.utils.translation import ugettext_lazy as _
 
+from core.games import game_registry
+
 
 def index(request):
-    return render(request, "index.html", {})
+    return render(request, "index.html", {"games": game_registry.values()})
 
 def logged_in(request):
     info(request, _("Logged in as %s" % request.user))
