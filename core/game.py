@@ -32,8 +32,13 @@ class GameBase(type):
         attrs.setdefault("Form", GameForm)
         new = super(GameBase, cls).__new__(cls, name, bases, attrs)
         name = name.lower()
-        if name != "game":
-            if name != "dummy":
+        # Don't register the base Game class, and don't register the
+        # Dummy game if we have others - we don't know which order
+        # they'll be registered in, so we block Dummy if we have any
+        # games, and remove Dummy if it's registered and another game
+        # is registered.
+        if name != "game" and not (name == "dummy" and game_registry):
+            if name != "dummy" and "dummy" in game_registry:
                 del game_registry["dummy"]
             game_registry[name] = new(name)
         return new
