@@ -7,7 +7,8 @@ from core.game import Game
 
 
 ROULETTE_CHOICES = range(0, 37)
-
+CRAP_WINS = (7, 11)
+CRAP_LOSES = (2, 3, 12)
 
 class Roulette(Game):
     """
@@ -52,11 +53,11 @@ class Craps(Game):
         """
         Roll once for a win or a loss, then again for a point.
         """
-        self.wins = (7, 11)
-        self.loses = (2, 3, 12)
         self.rolled = self.roll_dice()
         total = sum(self.rolled)
-        if total not in self.wins + self.loses:
+        if total in CRAP_WINS + CRAP_LOSES:
+            self.wins = CRAP_WINS
+        else:
             # Point hit (no wins or losses) - just roll again.
             self.pause()
             self.broadcast("craps_rolled", self.rolled, True)
