@@ -13,3 +13,10 @@ class Tests(TestCase):
         """
         user = User.objects.create(username="test")
         self.assertEquals(DEFAULT_BALANCE, user.account.balance)
+
+    def test_view(self):
+        """
+        General test for the main view to ensure it loads.
+        """
+        response = self.client.get("/")
+        self.assertEquals(response.status_code, 200)
