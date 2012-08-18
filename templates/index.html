@@ -38,7 +38,16 @@ Logged in as {{ request.user }} with ${{ request.user.account.balance }} <a href
 {% endif %}
 
 {% for game in games %}
-<div class="game game-{{ game.name }}"><a href="#">{{ game.name }}</a></div>
+<div class="game game-{{ game.name }}">
+    <a href="#">{{ game.name }}</a>
+    {% if request.user.is_authenticated %}
+    <form>
+        {{ game.Form.as_p }}
+        <input type="hidden" name="game" value="{{ game.name }}">
+        <input type="submit" value="{% trans "Bet" %}">
+    </form>
+    {% endif %}
+</div>
 {% endfor %}
 
 </div>

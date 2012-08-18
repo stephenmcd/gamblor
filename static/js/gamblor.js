@@ -32,4 +32,25 @@ $(function() {
 
     socket.emit('start');
 
+    $('.game form').each(function(i, form) {
+        form = $(form);
+        $(form).submit(function() {
+            var game, amount, args = [];
+            $.each($(form).serializeArray(), function(i, field) {
+                switch (field.name) {
+                    case 'game':
+                        game = field.value;
+                        break;
+                    case 'amount':
+                        amount = field.value;
+                        break;
+                    default:
+                        args[args.length] = field.value;
+                }
+            });
+            socket.emit('bet', game, amount, args);
+            return false;
+        });
+    });
+
 });
