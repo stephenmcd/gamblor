@@ -55,7 +55,18 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.staticfiles',
+
+    'compressor',
+    'social_auth',
+
 )
+
+try:
+    import django_extensions
+except ImportError:
+    pass
+else:
+    INSTALLED_APPS += ('django_extensions',)
 
 try:
     from local_settings import *
