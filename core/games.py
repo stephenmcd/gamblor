@@ -1,5 +1,5 @@
 
-from random import choice
+from random import choice, randint
 
 from django.forms import ChoiceField
 
@@ -21,3 +21,26 @@ class Roulette(Game):
 
     def outcome(self, choice):
         return (choice == self.landed_on) * len(ROULETTE_CHOICES)
+
+
+class Craps(Game):
+
+    def roll_dice(self):
+        once = lambda: randint(1, 6)
+        return [once(), once()]
+
+    def turn(self):
+        self.wins = (7, 11)
+        self.loses = (2, 3, 12)
+        self.rolled = self.roll_dice()
+        total = sum(self.rolled)
+        if total not in self.wins + self.loses:
+            self.pause()
+            self.broadcast("craps_rolled", self.rolled, True)
+            self.wins = (total,)
+            self.rolled = self.roll_dice()
+        self.broadcast("craps_rolled", self.rolled)
+        super(Craps, self).turn()
+
+    def outcome(self):
+        return int(sum(self.rolled) in self.wins)
