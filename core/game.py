@@ -12,6 +12,18 @@ from core.settings import BETTING_PERIOD
 game_registry = {}
 
 
+def autodiscover():
+    """
+    Look for any ``games`` modules in installed apps to ensure they
+    get registered.
+    """
+    for app in settings.INSTALLED_APPS:
+        try:
+            __import__("%s.games" % app)
+        except ImportError:
+            pass
+
+
 class GameBase(type):
     """
     Whenever Game is subclassed, add a new game instance to the registry.
@@ -110,15 +122,3 @@ class Dummy(Game):
     def outcome(self):
         # Give back 0 (lose), 1 (even) or 2 (win) times the bet.
         return randint(0, 2)
-
-
-def autodiscover():
-    """
-    Look for any ``games`` modules in installed apps to ensure they
-    get registered.
-    """
-    for app in settings.INSTALLED_APPS:
-        try:
-            __import__("%s.games" % app)
-        except ImportError:
-            pass
