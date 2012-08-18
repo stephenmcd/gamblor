@@ -48,6 +48,10 @@ class GamblorNamespace(BaseNamespace, BroadcastMixin):
         for game in game_registry.values():
             self.emit("game_users", game.name, game.players.keys())
 
+    def on_chat(self, message):
+        if self.user:
+            self.broadcast_event("chat", self.user, message)
+
     def recv_disconnect(self):
         """
         Socket disconnected - if the user was authenticated, remove

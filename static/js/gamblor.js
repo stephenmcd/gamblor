@@ -33,6 +33,22 @@ $(function() {
 
     socket.emit('start');
 
+    $('.chat').submit(function() {
+        var input = $('.chat .message');
+        socket.emit('chat', input.val());
+        input.val('');
+        input.focus();
+        return false;
+    });
+
+    socket.on('chat', function(user, message) {
+        if ($('.messages li').length == 10) {
+            $('.messages li:last').remove();
+
+        }
+        $('.messages').prepend('<li>' + user.name + ': ' + message + '</li>');
+    });
+
     $('.game form').each(function(i, form) {
         $(form).submit(function() {
             var game, amount, args = [];

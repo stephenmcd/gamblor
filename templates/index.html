@@ -51,6 +51,15 @@ Logged in as {{ request.user }} with ${{ request.user.account.balance }} <a href
 </div>
 {% endfor %}
 
+{% if request.user.is_authenticated %}
+<form class="chat">
+    <input type="text" class="message">
+    <input type="submit" value="{% trans "Say" %}">
+</form>
+{% endif %}
+
+<ul class="messages"></ul>
+
 </div>
 </body>
 </html>
