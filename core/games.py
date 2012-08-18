@@ -66,17 +66,26 @@ class Game(object):
         self.players[user_id]["bet_args"] = bet_args
         return True
 
+    def broadcast(self, *args):
+        """
+        Piggyback the first connected player's namespace to
+        broadcast a message.
+        """
+        for player in self.players.values():
+            if player["namespace"].socket.connected
+                player["namespace"].broadcast_event(*args)
+                break
+
+
     def turn(self):
         """
         Takes an actual turn of the game - called within a separate
         greenlet on the first call to bet(). We iterate through each of
         the players passing their bet_args to outcome() which multiplies
         the amount bet, and build a results dict we can broadcast back
-        to all sockets. We piggyback the first player we find that's
-        still connected, to broadcast the results back.
+        to all sockets.
         """
         sleep(BETTING_PERIOD)
-        broadcaster = None
         results = {}
         for user_id, player in self.players.items():
             result = self.outcome(*player["bet_args"])
@@ -86,10 +95,7 @@ class Game(object):
                 user = User.objects.get(id=user_id)
                 user.account.balance += (results[user_id] * 2)
                 user.account.save()
-            if broadcaster is None and player["namespace"].socket.connected:
-                broadcaster = player["namespace"]
-        if broadcaster is not None:
-            broadcaster.broadcast_event("game_end", self.name, results)
+        self.broadcast("game_end", self.name, results)
         self.reset()
 
     def reset(self):
