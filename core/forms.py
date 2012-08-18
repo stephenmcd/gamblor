@@ -4,7 +4,7 @@ from django import forms
 
 class GameForm(forms.Form):
 
-    amount = forms.IntegerField()
+    amount = forms.IntegerField(initial=100)
 
     def __init__(self, *args, **kwargs):
         super(GameForm, self).__init__(*args, **kwargs)
