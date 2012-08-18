@@ -1,0 +1,12 @@
+syntax: glob
+*.pyc
+*.pyo
+*.db
+.DS_Store
+.coverage
+local_settings.py
+build/*
+dist/*
+*.egg-info/*
+example_project/static
+
