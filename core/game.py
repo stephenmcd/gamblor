@@ -1,6 +1,7 @@
 
 from random import randint
 
+from django.conf import settings
 from django.contrib.auth.models import User
 from gevent import sleep, spawn
 
@@ -109,3 +110,15 @@ class Dummy(Game):
     def outcome(self):
         # Give back 0 (lose), 1 (even) or 2 (win) times the bet.
         return randint(0, 2)
+
+
+def autodiscover():
+    """
+    Look for any ``games`` modules in installed apps to ensure they
+    get registered.
+    """
+    for app in settings.INSTALLED_APPS:
+        try:
+            __import__("%s.games" % app)
+        except ImportError:
+            pass
