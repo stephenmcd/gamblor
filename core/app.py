@@ -1,6 +1,5 @@
 
 from Cookie import Cookie
-from random import randint
 
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
@@ -8,13 +7,12 @@ from django.contrib.auth import SESSION_KEY
 from django.contrib.auth.models import User
 from django.contrib.sessions.models import Session
 from django.utils.translation import ugettext_lazy as _
-from gevent import sleep, spawn
 from socketio import socketio_manage
 from socketio.mixins import BroadcastMixin
 from socketio.namespace import BaseNamespace
 from redis import Redis, ConnectionPool
 
-from core.settings import BETTING_PERIOD
+from core.games import game_registry
 
 
 redis = Redis(connection_pool=ConnectionPool())
@@ -90,11 +88,6 @@ class Game(object):
         return randint(0, 1)
 
 
-games = {
-    "dummy": Game("dummy")
-}
-
-
 class GamblorNamespace(BaseNamespace, BroadcastMixin):
     """
     Per-user socket.io namespace for event handlers.
@@ -122,7 +115,7 @@ class GamblorNamespace(BaseNamespace, BroadcastMixin):
             redis.sadd("users", self.user)
         # Send the current set of users to the new socket.
         self.emit("users", list(redis.smembers("users")))
-        for game in games.values():
+        for game in game_registry.values():
             self.emit("game_users", game.name, game.players.keys())
 
     def recv_disconnect(self):
@@ -139,11 +132,12 @@ class GamblorNamespace(BaseNamespace, BroadcastMixin):
         """
         Takes a bet for a game.
         """
+        import pdb; pdb.set_trace()
         try:
-            assert self.user is not None    # Must have a user
-            assert isinstance(amount, int)  # Amount must be int
-            assert amount > 0               # Amount must be positive
-            assert game_name in games       # Game must be valid
+            assert self.user is not None       # Must have a user
+            assert isinstance(amount, int)     # Amount must be int
+            assert amount > 0                  # Amount must be positive
+            assert game_name in game_registry  # Game must be valid
         except AssertionError:
             return
         user = User.objects.get(id=self.user["id"])
@@ -151,7 +145,7 @@ class GamblorNamespace(BaseNamespace, BroadcastMixin):
         if user.account.balance < 0:
             self.emit("notice", _("You don't have that amount to bet"))
         else:
-            game = games[game_name]
+            game = game_registry[game_name]
             if game.bet(self, amount, bet_args):
                 user.account.save()
             self.broadcast_event("game_users", game_name, game.players.keys())
