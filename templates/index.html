@@ -49,7 +49,7 @@ Logged in as {{ request.user }} with ${{ request.user.account.balance }} <a href
     <a href="#">{{ game.name }}</a>
     {% if request.user.is_authenticated %}
     <form>
-        {{ game.Form.as_p }}
+        {{ game.form }}
         <input type="hidden" name="game" value="{{ game.name }}">
         <input type="submit" value="{% trans "Bet" %}">
     </form>
