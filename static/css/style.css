@@ -211,3 +211,12 @@ body {
     max-width:400px;
     line-height:30px;
 }
+
+.credits {
+    margin-top:-20px;
+    color: #fff;
+}
+.credits a {
+    color: #ffc93f;
+    text-decoration:underline;
+}
