@@ -3,7 +3,8 @@
 {% for choice in game.form.fields.number.choices %}
 <div class="number
             number-{% if forloop.counter0 > 0 %}{% cycle "red" "black" %}{% endif %}
-            number-{{ choice.0 }}">{{ choice.0 }}</div>
+            number-{{ choice.0 }}
+            chip-drop">{{ choice.0 }}</div>
 {% if forloop.counter0|divisibleby:3 %}<br clear="both">{% endif %}
 {% endfor %}
 </div>

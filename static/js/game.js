@@ -1,6 +1,9 @@
 
 // Routines used across all games. See the js/games directory
-// for game specific JS.
+// for game specific JS, which adds named handlers to the handlers
+// object here.
+
+var gameHandlers = {};
 
 $(function() {
 
@@ -18,14 +21,24 @@ $(function() {
         helper: 'clone',
         cursor: 'move',
         cursorAt: {top: 50},
+        opacity: .6
     });
 
     // Make the game tables targets for dropping chips.
-    $('.game').droppable({
+    $('.chip-drop').droppable({
+        hoverClass: 'chip-drop-over',
         drop: function(event, ui) {
             var game = $(this);
+            while (!game.hasClass('game')) {
+                game = $(game.parent());
+            }
+            var form = game.find('form');
+            var name = game.find('[name="game"]').val();
+            if (gameHandlers[name]) {
+                gameHandlers[name](form, this);
+            }
             game.find('#id_amount').val(ui.draggable.text());
-            game.find('form').submit();
+            form.submit();
         }
     });
 
