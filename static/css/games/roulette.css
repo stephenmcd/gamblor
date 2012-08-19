@@ -1,4 +1,9 @@
 
+.game-roulette {left:85px;}
+.game-roulette .number-0 {background:#090; width:63px;}
+.game-roulette .number-red {background:#c00;}
+.game-roulette .number-black {background:#000;}
+
 .game-roulette .number {
     z-index:3;
     color:#fff;
@@ -17,10 +22,6 @@
     border-bottom:2px solid #000;
     border-right:2px solid #000;
 }
-
-.game-roulette .number-0 {background:#090; width:63px;}
-.game-roulette .number-red {background:#c00;}
-.game-roulette .number-black {background:#000;}
 
 .game-roulette .wheel {
     position:absolute;

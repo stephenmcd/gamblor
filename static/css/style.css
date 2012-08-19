@@ -1,14 +1,13 @@
 
+/* Firefox needs for background gradient to stretch */
 html {
-    height:100%; /* Firefox needs for background gradient to stretch */
+    height:100%;
 }
 
+/* Add the brown gradient background */
 body {
-
     text-align:center;
     text-shadow:none;
-
-    /* Background gradients by http://www.colorzilla.com/gradient-editor/ */
     background: #8c3310; /* Old browsers */
     background: -moz-radial-gradient(center, ellipse cover,  #8c3310 0%, #3f1200 100%); /* FF3.6+ */
     background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#8c3310), color-stop(100%,#3f1200)); /* Chrome,Safari4+ */
@@ -17,7 +16,6 @@ body {
     background: -ms-radial-gradient(center, ellipse cover,  #8c3310 0%,#3f1200 100%); /* IE10+ */
     background: radial-gradient(ellipse at center,  #8c3310 0%,#3f1200 100%); /* W3C */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8c3310', endColorstr='#3f1200',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-
 }
 
 .logo {
@@ -39,7 +37,7 @@ body {
     -webkit-box-shadow: 0 0 60px 0px rgba(0,0,0,.9);
     box-shadow:         0 0 60px 0px rgba(0,0,0,.9);
 
-    /* Background gradients by http://www.colorzilla.com/gradient-editor/ */
+    /* Green gradient background with tiles */
     background: url('../img/tiles.png'), #006e2e; /* Old browsers */
     background: url('../img/tiles.png'), -moz-radial-gradient(center, ellipse cover,  #006e2e 0%, #003315 100%); /* FF3.6+ */
     background: url('../img/tiles.png'), -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#006e2e), color-stop(100%,#003315)); /* Chrome,Safari4+ */
@@ -53,7 +51,7 @@ body {
 /* Game table */
 .game {
 
-    /* Background gradients by http://www.colorzilla.com/gradient-editor/ */
+    /* Inner shadow */
     background: #006e2e; /* Old browsers */
     background: -moz-radial-gradient(center, ellipse cover,  #006e2e 0%, #004c1e 100%); /* FF3.6+ */
     background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#006e2e), color-stop(100%,#004c1e)); /* Chrome,Safari4+ */
@@ -81,9 +79,6 @@ body {
 
 }
 
-.game-roulette {left:85px;}
-.game-craps {left:170px;}
-
 /* Game table shadow */
 .game:before {
     position:absolute;
@@ -97,6 +92,8 @@ body {
     box-shadow:         5px 5px 30px 0 rgba(0,0,0,1);
 }
 
+/* Bets occur via each game's bet form, but we control it via
+   JavaScript, so hide them */
 .game form {
     display:none;
 }
@@ -111,6 +108,7 @@ body {
     padding-right:20px;
     height:50px;
 
+    /* Black top to transparent footer background */
     background: -moz-linear-gradient(top,  rgba(0,0,0,0.3) 0%, rgba(0,0,0,0) 100%); /* FF3.6+ */
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.3)), color-stop(100%,rgba(0,0,0,0))); /* Chrome,Safari4+ */
     background: -webkit-linear-gradient(top,  rgba(0,0,0,0.3) 0%,rgba(0,0,0,0) 100%); /* Chrome10+,Safari5.1+ */
@@ -121,20 +119,16 @@ body {
 
 }
 
-.chat {
-    margin:0;
-}
-
-.chat .btn {
-    letter-spacing:1px;
-}
-
+/* Chat form */
+.chat {margin:0;}
+.chat .btn {letter-spacing:1px;}
 .chat .message {
     margin:3px;
     width:300px;
     border:2px solid #000;
 }
 
+/* Draggable betting chips */
 .chip {
 
     z-index:50;
@@ -163,12 +157,12 @@ body {
 
 }
 
+/* Moveable user avatar */
 .user {
     display:none;
     position: absolute;
     z-index:50;
 }
-
 .user img {
     width: 40px;
     height:40px;
