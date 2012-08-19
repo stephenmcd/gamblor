@@ -1,7 +1,7 @@
 
 $(function() {
 
-    socket = io.connect(':9000', {
+    socket = io.connect(':' + port, {
         transports: ['websocket', 'htmlfile', 'xhr-multipart',
                      'xhr-polling', 'jsonp-polling']
     });

@@ -5,10 +5,15 @@ from django.shortcuts import render, redirect
 from django.utils.translation import ugettext_lazy as _
 
 from core.game import game_registry
+from core.settings import SOCKETIO_PORT
 
 
 def index(request):
-    return render(request, "index.html", {"games": game_registry.values()})
+    context = {
+        "SOCKETIO_PORT": SOCKETIO_PORT,
+        "games": game_registry.values(),
+    }
+    return render(request, "index.html", context)
 
 
 def logged_in(request):
