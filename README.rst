@@ -74,3 +74,5 @@ fell short of time:
   * Provide ways of getting more money (share on Twitter, random handouts).
   * Sound effects!
   * Walking animations for avatars.
+  * Animated dice for Craps.
+
