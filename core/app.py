@@ -6,6 +6,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth import SESSION_KEY
 from django.contrib.auth.models import User
 from django.contrib.sessions.models import Session
+from django.utils.simplejson import loads, dumps
 from django.utils.translation import ugettext_lazy as _
 from socketio import socketio_manage
 from socketio.mixins import BroadcastMixin
@@ -48,9 +49,9 @@ class GameNamespace(BaseNamespace, BroadcastMixin):
                 "y": 200,
             }
             self.broadcast_event_not_me("join", self.user)
-            redis.hset(USERS_KEY, self.user["id"], self.user)
+            redis.hset(USERS_KEY, self.user["id"], dumps(self.user))
         # Send the current set of users to the new socket.
-        self.emit("users", [eval(u) for u in redis.hvals(USERS_KEY)])
+        self.emit("users", [loads(u) for u in redis.hvals(USERS_KEY)])
         # for game in registry.values():
         #     self.emit("game_users", game.name, game.players.keys())
 
@@ -61,7 +62,7 @@ class GameNamespace(BaseNamespace, BroadcastMixin):
     def on_move(self, pos):
         if self.user:
             self.user.update(pos)
-            redis.hset(USERS_KEY, self.user["id"], self.user)
+            redis.hset(USERS_KEY, self.user["id"], dumps(self.user))
             self.broadcast_event_not_me("move", self.user)
 
     def recv_disconnect(self):
