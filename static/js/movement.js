@@ -9,12 +9,10 @@ $(function() {
 
         var avatar = $('#user-' + userID);
 
-
         if (avatar.length == 0) {
             return;
         }
 
-        var px = 3;
         dir = {
             37: {left: '-=' + MOVE_PX},
             38: {top:  '-=' + MOVE_PX},
@@ -29,6 +27,7 @@ $(function() {
                     top: avatar.css('top'),
                     left: avatar.css('left')
                 }
+                dir.zIndex = zIndex++;
                 avatar.css(dir);
                 outside = avatar.collision('.main', {mode: 'protrusion'}).length
                 collided = avatar.collision('.game').length;
@@ -61,14 +60,13 @@ $(function() {
         var offset = $('.main').offset();
         var to = {
             top: offset.top + user.y,
-            left: offset.left + user.x,
+            left: offset.left + user.x
         };
         var offset = avatar.offset();
         var distance = Math.max(Math.abs(to.top - offset.top),
                                 Math.abs(to.left - offset.left));
-        console.log(distance);
         var duration = distance / MOVE_PX * MOVE_INTERVAL_MS;
-        $('#user-' + user.id).animate(to, duration, 'linear');
+        avatar.css({zIndex: zIndex++}).animate(to, duration, 'linear');
     });
 
 });

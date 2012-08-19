@@ -1,4 +1,6 @@
 
+var zIndex = 1;
+
 $(function() {
 
     var show = function(user) {
@@ -7,6 +9,7 @@ $(function() {
         $('.main').append('<div class="user" id="user-' + user.id + '">' +
                          '<img src="' + photo + '"></div>');
         $('#user-' + user.id).css({
+            zIndex: zIndex++,
             top: offset.top + user.y,
             left: offset.left + user.x,
         }).fadeIn();
