@@ -46,20 +46,6 @@ var STATIC_URL      = '{{ STATIC_URL }}';
 <img class="logo" src="{{ STATIC_URL }}img/logo.png">
 <div class="main">
 
-
-<!--
-{% for message in messages %}
-<p>{{ message }}</p>
-{% endfor %}
-
-{% if request.user.is_authenticated %}
-Logged in as {{ request.user }} with ${{ request.user.account.balance }} <a href="{% url logout %}">Logout</a>
-{% else %}
-
-{% endif %}
-
--->
-
 {% for game in games %}
 <div class="game game-{{ game.name }}">
     {% include game.template %}
@@ -74,14 +60,27 @@ Logged in as {{ request.user }} with ${{ request.user.account.balance }} <a href
 </div>
 {% endfor %}
 
-
-<ul class="messages"></ul>
+{% if not request.user.is_authenticated %}
+<div class="welcome">
+    <h1>Welcome to Gamblor :-)</h1>
+    <p>
+        Login via Twitter or Facebook below to create your avatar,
+        chat with friends, run around and play some games to win
+        some fake money!
+    </p>
+    <a href="{% url socialauth_begin "twitter" %}">
+        <img src="{{ STATIC_URL }}img/login-twitter.png">
+    </a>
+    <a href="{% url socialauth_begin "facebook" %}">
+        <img src="{{ STATIC_URL }}img/login-facebook.png">
+    </a>
+</div>
+{% endif %}
 
 </div>
 
-
-<div class="footer">
 {% if request.user.is_authenticated %}
+<div class="footer">
 <div class="chip" style="background:#000;">1000</div>
 <div class="chip" style="background:#f00;">500</div>
 <div class="chip" style="background:#00AA19;">100</div>
@@ -93,10 +92,10 @@ Logged in as {{ request.user }} with ${{ request.user.account.balance }} <a href
     <input type="text" class="message" placeholder="Message">
     <input type="submit" class="btn btn-inverse" value="{% trans "Say" %}">
 </form>
-{% else %}
-<a href="{% url socialauth_begin "twitter" %}">Login via Twitter</a>
-{% endif %}
 </div>
+{% else %}
+<br><br>
+{% endif %}
 
 <p class="credits">
     Created by <a href="http://twitter.com/stephen_mcd">Stephen McDonald</a>
