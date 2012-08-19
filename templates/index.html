@@ -28,18 +28,8 @@ var socket;
 var userID = '{{ request.user.id }}';
 var SOCKETIO_PORT = {{ SOCKETIO_PORT }};
 var MEDIA_URL = '{{ MEDIA_URL }}';
-
-$(function() {
-    $('.wheel').click(function() {
-        var rotate = 10000 + Math.random() * 360;
-        var start = {rotate: '0deg'};
-        var stop = {rotate: rotate + 'deg'};
-        $('.wheel').transition(start).transition(stop, 5000, 'snap');
-
-    });
-});
-
 </script>
+
 <script src="{{ STATIC_URL }}js/socket.js"></script>
 <script src="{{ STATIC_URL }}js/game.js"></script>
 <script src="{{ STATIC_URL }}js/chat.js"></script>
@@ -79,6 +69,7 @@ Logged in as {{ request.user }} with ${{ request.user.account.balance }} <a href
         <input type="submit" value="{% trans "Bet" %}">
     </form>
     {% endif %}
+    <p class="message message-{{ game.name }}">Place your bets!</p>
 </div>
 {% endfor %}
 

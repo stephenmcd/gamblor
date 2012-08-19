@@ -51,8 +51,9 @@ class GameNamespace(BaseNamespace, BroadcastMixin):
             redis.hset(USERS_KEY, self.user["id"], dumps(self.user))
         # Send the current set of users to the new socket.
         self.emit("users", [loads(u) for u in redis.hvals(USERS_KEY)])
-        # for game in registry.values():
-        #     self.emit("game_users", game.name, game.players.keys())
+        for game in registry.values():
+            if game.players:
+                self.emit("game_users", game.name, game.players.keys())
 
     def on_chat(self, message):
         if self.user:

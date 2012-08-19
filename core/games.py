@@ -27,8 +27,8 @@ class Roulette(Game):
         Each turn assigns a random choice from the numbers on the wheel.
         """
         self.landed_on = str(choice(ROULETTE_CHOICES))
-        self.broadcast("roulette_landed_on", self.landed_on)
-        super(Roulette, self).turn()
+        callback_args = ("roulette_landed_on", self.landed_on)
+        super(Roulette, self).turn(self.broadcast, callback_args)
 
     def outcome(self, choice):
         """

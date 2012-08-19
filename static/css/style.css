@@ -97,6 +97,13 @@ body {
     display:none;
 }
 
+.game .message {
+    position:absolute;
+    top: 240px;
+    left:120px;
+    color:#fff;
+}
+
 .footer {
 
     text-align:right;

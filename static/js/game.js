@@ -7,12 +7,11 @@ var gameHandlers = {};
 
 $(function() {
 
-    /*socket.on('game_users', function(game, users) {
-        var text = users.length > 0 ? 'Players: ' + users.join(', ') : '';
-        $('.game-' + game + ' .players').html(text);
+    socket.on('game_users', function(game, users) {
+        $('.message-' + game).html('Current players: ' + users.length);
     });
 
-    socket.on('game_end', function(game, results) {
+    /*socket.on('game_end', function(game, results) {
         $('.game-' + game + ' .players').html('');
     });*/
 

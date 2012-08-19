@@ -101,7 +101,7 @@ class Game(object):
         """
         sleep(BETTING_PERIOD)
 
-    def turn(self):
+    def turn(self, callback=None, callback_args=None, callback_kwargs=None):
         """
         Takes an actual turn of the game - called within a separate
         greenlet on the first call to bet(). We iterate through each of
@@ -119,6 +119,10 @@ class Game(object):
                 user = User.objects.get(id=user_id)
                 user.account.balance += (results[user_id] * 2)
                 user.account.save()
+        if callback:
+            callback_args = callback_args or ()
+            callback_kwargs = callback_kwargs or {}
+            callback(*callback_args, **callback_kwargs)
         self.broadcast("game_end", self.name, results)
         self.reset()
 
