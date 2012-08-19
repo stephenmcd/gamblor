@@ -1,0 +1,30 @@
+
+.game-roulette .number {
+    z-index:3;
+    color:#fff;
+    width:20px;
+    height:17px;
+    float:left;
+    font-size:10px;
+    text-align:center;
+    border-top:2px solid #000;
+    border-left:2px solid #000;
+}
+
+.game-roulette .numbers {
+    margin:15px;
+    display:inline-block;
+    border-bottom:2px solid #000;
+    border-right:2px solid #000;
+}
+
+.game-roulette .number-0 {background:#090; width:63px;}
+.game-roulette .number-red {background:#c00;}
+.game-roulette .number-black {background:#000;}
+
+.game-roulette .wheel {
+    position:absolute;
+    margin:65px 97px;
+    width:135px;
+    height:135px;
+}
