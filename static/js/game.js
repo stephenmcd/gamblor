@@ -58,6 +58,11 @@ $(function() {
                         args[args.length] = field.value;
                 }
             });
+            var balance = parseFloat($('.balance').text().replace('$', ''));
+            balance -= amount;
+            if (balance > 0) {
+                $('.balance').text('$' + balance);
+            }
             socket.emit('bet', game, amount, args);
             return false;
         });
