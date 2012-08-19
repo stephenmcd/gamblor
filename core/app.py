@@ -67,10 +67,10 @@ class GameNamespace(BaseNamespace, BroadcastMixin):
         Takes a bet for a game.
         """
         try:
-            assert self.user is not None       # Must have a user
-            assert str(amount).isdigit()       # Amount must be digit
-            assert int(amount) > 0             # Amount must be positive
-            assert game_name in registry       # Game must be valid
+            assert self.user is not None  # Must have a user
+            assert str(amount).isdigit()  # Amount must be digit
+            assert int(amount) > 0        # Amount must be positive
+            assert game_name in registry  # Game must be valid
         except AssertionError:
             return
         amount = int(amount)
