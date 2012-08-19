@@ -4,3 +4,6 @@ django-social-auth==0.7.4
 redis==2.6.2
 gevent-socketio==0.3.5-beta
 PIL==1.1.7
+
+psycopg2==2.4.4
+gunicorn==0.14.6
