@@ -12,15 +12,15 @@
 <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.responsive.css">
 <link rel="stylesheet" href="{{ STATIC_URL }}css/gamblor.css">
 
+<script src="{{ STATIC_URL }}js/libs/jquery.min.js"></script>
+<script src="{{ STATIC_URL }}js/libs/bootstrap.min.js"></script>
+<script src="{{ STATIC_URL }}js/libs/json2.js"></script>
+<script src="{{ STATIC_URL }}js/libs/socket.io.min.js"></script>
+<script src="{{ STATIC_URL }}js/libs/jquery-collision.js"></script>
+
 <script>
 var socket, port = {{ SOCKETIO_PORT }};
 </script>
-
-<script src="{{ STATIC_URL }}js/jquery.min.js"></script>
-<script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
-<script src="{{ STATIC_URL }}js/json2.js"></script>
-<script src="{{ STATIC_URL }}js/socket.io.min.js"></script>
-<script src="{{ STATIC_URL }}js/jquery-collision.js"></script>
 <script src="{{ STATIC_URL }}js/gamblor.js"></script>
 {% for game in games %}
 <script src="{{ STATIC_URL }}js/games/{{ game.name }}.js"></script>
