@@ -25,7 +25,10 @@
 <script src="{{ STATIC_URL }}js/libs/socket.io.min.js"></script>
 
 <script>
-var socket, port = {{ SOCKETIO_PORT }};
+var socket;
+var userID = '{{ request.user.id }}';
+var SOCKETIO_PORT = {{ SOCKETIO_PORT }};
+var MEDIA_URL = '{{ MEDIA_URL }}';
 
 $(function() {
     $('.wheel').click(function() {
@@ -36,9 +39,10 @@ $(function() {
 
     });
 });
+
 </script>
-<script src="{{ STATIC_URL }}js/logo.js"></script>
 <script src="{{ STATIC_URL }}js/game.js"></script>
+<script src="{{ STATIC_URL }}js/logo.js"></script>
 {% for game in games %}
 <script src="{{ STATIC_URL }}js/games/{{ game.name }}.js"></script>
 {% endfor %}
@@ -48,6 +52,7 @@ $(function() {
 <body>
 <img class="logo" src="{{ STATIC_URL }}img/logo.png">
 <div class="main">
+
 
 <!--
 {% for message in messages %}
@@ -64,10 +69,6 @@ Logged in as {{ request.user }} with ${{ request.user.account.balance }} <a href
 
 {% for game in games %}
 <div class="game game-{{ game.name }}">
-    <!--
-    <p class="players"></p>
-    <a href="#">{{ game.name }}</a>
-    -->
     {% include game.template %}
     {% if request.user.is_authenticated %}
     <form>

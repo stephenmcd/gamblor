@@ -1,24 +1,12 @@
 
 $(function() {
 
-    socket = io.connect(':' + port, {
+    socket = io.connect(':' + SOCKETIO_PORT, {
         transports: ['websocket', 'htmlfile', 'xhr-multipart',
                      'xhr-polling', 'jsonp-polling']
     });
 
-    socket.on('users', function(users) {
-        console.log('users: ', users);
-    });
-
-    socket.on('join', function(user) {
-        console.log('joined: ', user);
-    });
-
-    socket.on('leave', function(user) {
-        console.log('left: ', user);
-    });
-
-    socket.on('notice', function(notice) {
+    /*socket.on('notice', function(notice) {
         alert(notice);
     });
 
@@ -29,24 +17,9 @@ $(function() {
 
     socket.on('game_end', function(game, results) {
         $('.game-' + game + ' .players').html('');
-    });
+    });*/
 
     socket.emit('start');
-
-    $('.chat').submit(function() {
-        var input = $('.chat .message');
-        socket.emit('chat', input.val());
-        input.val('');
-        input.focus();
-        return false;
-    });
-
-    socket.on('chat', function(user, message) {
-        if ($('.messages li').length == 10) {
-            $('.messages li:last').remove();
-        }
-        $('.messages').prepend('<li>' + user.name + ': ' + message + '</li>');
-    });
 
     $('.chip').draggable({
         helper: 'clone',
