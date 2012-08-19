@@ -1,5 +1,6 @@
 
 from Cookie import Cookie
+from random import randint
 
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
@@ -44,8 +45,8 @@ class GameNamespace(BaseNamespace, BroadcastMixin):
             self.user = {
                 "id": user.id,
                 "name": user.username,
-                "x": 880,
-                "y": 200,
+                "x": randint(780, 980),
+                "y": randint(100, 300),
             }
             self.broadcast_event_not_me("join", self.user)
             redis.hset(USERS_KEY, self.user["id"], dumps(self.user))
