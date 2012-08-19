@@ -131,7 +131,6 @@ body {
     width:300px;
 }
 
-
 .chip {
 
     width: 60px;
@@ -148,6 +147,7 @@ body {
     margin-top:-57px;
     text-shadow:none;
     margin-left:5px;
+    cursor:pointer;
 
     -moz-transform:     perspective(100px) rotateX(60deg);
     -webkit-transform:  perspective(100px) rotateX(60deg);
