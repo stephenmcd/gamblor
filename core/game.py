@@ -9,7 +9,7 @@ from core.forms import GameForm
 from core.settings import BETTING_PERIOD
 
 
-game_registry = {}
+registry = {}
 
 
 def autodiscover():
@@ -37,10 +37,10 @@ class GameBase(type):
         # they'll be registered in, so we block Dummy if we have any
         # games, and remove Dummy if it's registered and another game
         # is registered.
-        if name != "game" and not (name == "dummy" and game_registry):
-            if name != "dummy" and "dummy" in game_registry:
-                del game_registry["dummy"]
-            game_registry[name] = new(name)
+        if name != "game" and not (name == "dummy" and registry):
+            if name != "dummy" and "dummy" in registry:
+                del registry["dummy"]
+            registry[name] = new(name)
         return new
 
 

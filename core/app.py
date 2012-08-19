@@ -12,7 +12,7 @@ from socketio.mixins import BroadcastMixin
 from socketio.namespace import BaseNamespace
 from redis import Redis, ConnectionPool
 
-from core.game import game_registry
+from core.game import registry
 
 
 redis = Redis(connection_pool=ConnectionPool())
@@ -45,7 +45,7 @@ class GameNamespace(BaseNamespace, BroadcastMixin):
             redis.sadd("users", self.user)
         # Send the current set of users to the new socket.
         self.emit("users", list(redis.smembers("users")))
-        for game in game_registry.values():
+        for game in registry.values():
             self.emit("game_users", game.name, game.players.keys())
 
     def on_chat(self, message):
@@ -70,7 +70,7 @@ class GameNamespace(BaseNamespace, BroadcastMixin):
             assert self.user is not None       # Must have a user
             assert str(amount).isdigit()       # Amount must be digit
             assert amount > 0                  # Amount must be positive
-            assert game_name in game_registry  # Game must be valid
+            assert game_name in registry       # Game must be valid
         except AssertionError:
             return
         amount = int(amount)
@@ -79,7 +79,7 @@ class GameNamespace(BaseNamespace, BroadcastMixin):
         if user.account.balance < 0:
             self.emit("notice", _("You don't have that amount to bet"))
         else:
-            game = game_registry[game_name]
+            game = registry[game_name]
             if game.bet(self, amount, bet_args):
                 user.account.save()
             self.broadcast_event("game_users", game_name, game.players.keys())

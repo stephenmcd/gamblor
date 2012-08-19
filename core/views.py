@@ -4,14 +4,14 @@ from django.contrib.messages import info, error
 from django.shortcuts import render, redirect
 from django.utils.translation import ugettext_lazy as _
 
-from core.game import game_registry
+from core.game import registry
 from core.settings import SOCKETIO_PORT
 
 
 def index(request):
     context = {
         "SOCKETIO_PORT": SOCKETIO_PORT,
-        "games": game_registry.values(),
+        "games": registry.values(),
     }
     return render(request, "index.html", context)
 
