@@ -55,8 +55,9 @@ class Game(object):
     __metaclass__ = GameBase
 
     def __init__(self, name):
-        self.form = self.__class__.Form()
         self.name = name
+        self.template = "games/%s.html" % self.name
+        self.form = self.__class__.Form()
         self.reset()
 
     def bet(self, namespace, amount, bet_args):
