@@ -137,11 +137,12 @@ body {
     width: 60px;
     height: 60px;
     text-align: center;
-    font-size: 20px;
+    font-size: 24px;
     color: white;
     border:4px dashed white;
     border-radius: 50px;
     float: right;
+    letter-spacing:-1px;
     font-weight: bold;
     line-height: 70px;
     margin-top:-57px;
