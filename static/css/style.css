@@ -204,3 +204,10 @@ body {
     z-index:49;
     position: relative;
 }
+
+.tooltip-inner {
+    font-size:20px;
+    padding:10px 20px;
+    max-width:400px;
+    line-height:30px;
+}
