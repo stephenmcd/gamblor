@@ -51,7 +51,15 @@ $(function() {
     $('.chip').draggable({
         helper: 'clone',
         cursor: 'move',
-        cursorAt: {top: 50}
+        cursorAt: {top: 50},
+    });
+
+    $('.game').droppable({
+        drop: function(event, ui) {
+            var game = $(this);
+            game.find('#id_amount').val(ui.draggable.text());
+            game.find('form').submit();
+        }
     });
 
     $('.game form').each(function(i, form) {
