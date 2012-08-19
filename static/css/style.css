@@ -174,14 +174,18 @@ body {
 .user {
     display:none;
     position: absolute;
-    z-index:50;
-}
-.user img {
+    text-align:center;
     width: 40px;
-    height:40px;
-    border-radius:5px;
+    z-index:49;
+}
+.user .photo {
+    z-index:50;
+    position: relative;
+    margin-bottom:-10px;
+    border-radius:25px;
     border:1px solid rgba(0,0,0,.5);
-    -moz-box-shadow:    0px 5px 10px 0 rgba(0, 0, 0, .6);
-    -webkit-box-shadow: 0px 5px 10px 0 rgba(0, 0, 0, .6);
-    box-shadow:         0px 5px 10px 0 rgba(0, 0, 0, .6);
+}
+.user .body {
+    z-index:49;
+    position: relative;
 }

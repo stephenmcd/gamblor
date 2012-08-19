@@ -14,8 +14,10 @@ $(function() {
     var show = function(user) {
         var offset = $('.main').offset();
         var photo = MEDIA_URL + 'photos/' + user.id;
+        var body = STATIC_URL + 'img/body.png';
         $('.main').append('<div class="user" id="user-' + user.id + '">' +
-                         '<img src="' + photo + '"></div>');
+                          '<img class="photo" src="' + photo + '"><br>' +
+                          '<img class="body" src="' + body + '""></div>');
         $('#user-' + user.id).css({
             zIndex: zIndex++,
             top: offset.top + user.y,

@@ -25,9 +25,10 @@
 
 <script>
 var socket;
-var userID = '{{ request.user.id }}';
-var SOCKETIO_PORT = {{ SOCKETIO_PORT }};
-var MEDIA_URL = '{{ MEDIA_URL }}';
+var userID          = '{{ request.user.id }}';
+var SOCKETIO_PORT   = {{ SOCKETIO_PORT }};
+var MEDIA_URL       = '{{ MEDIA_URL }}';
+var STATIC_URL      = '{{ STATIC_URL }}';
 </script>
 
 <script src="{{ STATIC_URL }}js/socket.js"></script>
