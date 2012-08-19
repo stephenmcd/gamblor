@@ -1,16 +1,10 @@
 
+// Routines used across all games. See the js/games directory
+// for game specific JS.
+
 $(function() {
 
-    socket = io.connect(':' + SOCKETIO_PORT, {
-        transports: ['websocket', 'htmlfile', 'xhr-multipart',
-                     'xhr-polling', 'jsonp-polling']
-    });
-
-    /*socket.on('notice', function(notice) {
-        alert(notice);
-    });
-
-    socket.on('game_users', function(game, users) {
+    /*socket.on('game_users', function(game, users) {
         var text = users.length > 0 ? 'Players: ' + users.join(', ') : '';
         $('.game-' + game + ' .players').html(text);
     });
@@ -19,14 +13,14 @@ $(function() {
         $('.game-' + game + ' .players').html('');
     });*/
 
-    socket.emit('start');
-
+    // Make the chips draggable.
     $('.chip').draggable({
         helper: 'clone',
         cursor: 'move',
         cursorAt: {top: 50},
     });
 
+    // Make the game tables targets for dropping chips.
     $('.game').droppable({
         drop: function(event, ui) {
             var game = $(this);
@@ -35,6 +29,8 @@ $(function() {
         }
     });
 
+    // Handles submitting the bet form for a game - builds up the
+    // arguments and sends it to the socket.
     $('.game form').each(function(i, form) {
         $(form).submit(function() {
             var game, amount, args = [];
