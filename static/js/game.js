@@ -11,9 +11,14 @@ $(function() {
         $('.message-' + game).html('Current players: ' + users.length);
     });
 
-    /*socket.on('game_end', function(game, results) {
-        $('.game-' + game + ' .players').html('');
-    });*/
+    socket.on('game_end', function(game, results) {
+        setTimeout(function() {
+            $.each(results, function(uid, amount) {
+                var message = amount > 0 ? 'I won $' + amount + '!' : 'I lost :(';
+                say(uid, message);
+            });
+        }, 5000);
+    });
 
     // Make the chips draggable.
     $('.chip').draggable({

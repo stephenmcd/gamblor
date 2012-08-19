@@ -14,19 +14,23 @@ $(function() {
 
     var chatTimeouts = {};
 
+    socket.on('chat', function(user, message) {
+        say(user.id, message);
+    });
+
     // New message received - show it in a bootstrap tooltip on the
     // avatar of the user who sent it.
-    socket.on('chat', function(user, message) {
+    say = function(uid, message) {
         // Their previous message may be closing the tooltip.
-        clearTimeout(chatTimeouts[user.id]);
-        var avatar = $('#user-' + user.id);
+        clearTimeout(chatTimeouts[uid]);
+        var avatar = $('#user-' + uid);
         // Hack that lets us set a new value each time.
         avatar.attr('data-original-title', message);
         avatar.tooltip('show');
-        chatTimeouts[user.id] = setTimeout(function() {
+        chatTimeouts[uid] = setTimeout(function() {
             closeChat(avatar);
         }, 5000);
-    });
+    }
 
     // Just closes the tooltip. Also called from users.js when a user
     // moves, since the tooltip can't follow them.
