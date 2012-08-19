@@ -69,7 +69,7 @@ class GameNamespace(BaseNamespace, BroadcastMixin):
         try:
             assert self.user is not None       # Must have a user
             assert str(amount).isdigit()       # Amount must be digit
-            assert amount > 0                  # Amount must be positive
+            assert int(amount) > 0             # Amount must be positive
             assert game_name in registry       # Game must be valid
         except AssertionError:
             return
