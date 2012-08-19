@@ -147,7 +147,7 @@ body {
     margin-top:-57px;
     text-shadow:none;
     margin-left:5px;
-    cursor:pointer;
+    cursor:move;
 
     -moz-transform:     perspective(100px) rotateX(60deg);
     -webkit-transform:  perspective(100px) rotateX(60deg);

@@ -48,7 +48,11 @@ $(function() {
         $('.messages').prepend('<li>' + user.name + ': ' + message + '</li>');
     });
 
-    $('.chip').draggable({helper: 'clone'});
+    $('.chip').draggable({
+        helper: 'clone',
+        cursor: 'move',
+        cursorAt: {top: 50}
+    });
 
     $('.game form').each(function(i, form) {
         $(form).submit(function() {
