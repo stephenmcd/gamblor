@@ -1,4 +1,6 @@
 
+// Faux flashing casino-like logo - flickers it on and off randomly.
+
 $(function() {
 
     var flicker = function() {
