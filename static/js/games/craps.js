@@ -1,8 +1,12 @@
 $(function() {
 
     socket.on('craps_rolled', function(rolled, again) {
-        again = again ? ' (rolling again)' : '';
-        alert('Craps rolled: ' + rolled.join('/') + again);
+        var message = $('.message-craps');
+        var text = 'Rolled ' + rolled.join(' and ');
+        if (again) {
+            text += ', rolling again';
+        }
+        message.text(text);
     });
 
 });
