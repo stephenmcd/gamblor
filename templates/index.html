@@ -11,6 +11,10 @@
 <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.slate.css">
 <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.responsive.css">
 <link rel="stylesheet" href="{{ STATIC_URL }}css/style.css">
+{% for game in games %}
+<link rel="stylesheet" href="{{ STATIC_URL }}css/games/{{ game.name }}.css">
+{% endfor %}
+
 
 <script src="{{ STATIC_URL }}js/libs/jquery.min.js"></script>
 <script src="{{ STATIC_URL }}js/libs/jquery-ui.min.js"></script>
