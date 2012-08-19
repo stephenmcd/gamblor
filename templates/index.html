@@ -91,16 +91,16 @@ Logged in as {{ request.user }} with ${{ request.user.account.balance }} <a href
 
 <div class="footer">
 {% if request.user.is_authenticated %}
-<form class="chat" class="">
-    <input type="text" class="message">
-    <input type="submit" class="btn btn-inverse" value="{% trans "Say" %}">
-</form>
 <div class="chip" style="background:#000;">1000</div>
 <div class="chip" style="background:#f00;">500</div>
 <div class="chip" style="background:#00AA19;">100</div>
 <div class="chip" style="background:#0200A5;">50</div>
 <div class="chip" style="background:#606;">20</div>
 <div class="chip" style="background:#ffa60d;">5</div>
+<form class="chat" class="">
+    <input type="text" class="message">
+    <input type="submit" class="btn btn-inverse" value="{% trans "Say" %}">
+</form>
 {% else %}
 <a href="{% url socialauth_begin "twitter" %}">Login via Twitter</a>
 {% endif %}

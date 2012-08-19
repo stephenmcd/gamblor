@@ -103,7 +103,7 @@ body {
 
 .footer {
 
-    text-align:left;
+    text-align:right;
     width:1050px;
     border-radius:5px;
     margin:25px auto;
@@ -145,12 +145,12 @@ body {
     color: white;
     border:4px dashed white;
     border-radius: 50px;
-    float: right;
+    float: left;
     letter-spacing:-1px;
     font-weight: bold;
     line-height: 70px;
-    margin-top:-57px;
-    margin-left:5px;
+    margin-top:-27px;
+    margin-right:5px;
     cursor:move;
 
     -moz-transform:     perspective(100px) rotateX(60deg);
