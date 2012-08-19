@@ -1,1 +1,44 @@
-.game {background:#eee;}
+
+html {height:100%;}  /* Firefox needs for background gradient to stretch */
+
+
+body {
+
+    text-align:center;
+
+    /* Background gradients by http://www.colorzilla.com/gradient-editor/ */
+    background: #8c3310; /* Old browsers */
+    background: -moz-radial-gradient(center, ellipse cover,  #8c3310 0%, #3f1200 100%); /* FF3.6+ */
+    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#8c3310), color-stop(100%,#3f1200)); /* Chrome,Safari4+ */
+    background: -webkit-radial-gradient(center, ellipse cover,  #8c3310 0%,#3f1200 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-radial-gradient(center, ellipse cover,  #8c3310 0%,#3f1200 100%); /* Opera 12+ */
+    background: -ms-radial-gradient(center, ellipse cover,  #8c3310 0%,#3f1200 100%); /* IE10+ */
+    background: radial-gradient(ellipse at center,  #8c3310 0%,#3f1200 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8c3310', endColorstr='#3f1200',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
+}
+
+.logo {
+    width:394px;
+    height:100px;
+}
+
+.main {
+
+    width:1100px;
+    height:470px;
+    margin:0 auto;
+    border:5px solid rgb(0, 25, 0);
+    border-radius:10px;
+    box-shadow: 0 0 60px 0px rgba(0,0,0,.9);
+
+    /* Background gradients by http://www.colorzilla.com/gradient-editor/ */
+    background: url('../img/tiles.png'), #006e2e; /* Old browsers */
+    background: url('../img/tiles.png'), -moz-radial-gradient(center, ellipse cover,  #006e2e 0%, #003315 100%); /* FF3.6+ */
+    background: url('../img/tiles.png'), -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#006e2e), color-stop(100%,#003315)); /* Chrome,Safari4+ */
+    background: url('../img/tiles.png'), -webkit-radial-gradient(center, ellipse cover,  #006e2e 0%,#003315 100%); /* Chrome10+,Safari5.1+ */
+    background: url('../img/tiles.png'), -o-radial-gradient(center, ellipse cover,  #006e2e 0%,#003315 100%); /* Opera 12+ */
+    background: url('../img/tiles.png'), -ms-radial-gradient(center, ellipse cover,  #006e2e 0%,#003315 100%); /* IE10+ */
+    background: url('../img/tiles.png'), radial-gradient(ellipse at center,  #006e2e 0%,#003315 100%); /* W3C */
+
+}

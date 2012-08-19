@@ -29,7 +29,8 @@ var socket, port = {{ SOCKETIO_PORT }};
 </head>
 
 <body>
-<div class="container">
+<img class="logo" src="{{ STATIC_URL }}img/logo.png">
+<div class="main">
 
 {% for message in messages %}
 <p>{{ message }}</p>
