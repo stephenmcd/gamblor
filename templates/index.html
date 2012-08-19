@@ -97,8 +97,8 @@ Logged in as {{ request.user }} with ${{ request.user.account.balance }} <a href
 <div class="chip" style="background:#0200A5;">50</div>
 <div class="chip" style="background:#606;">20</div>
 <div class="chip" style="background:#ffa60d;">5</div>
-<form class="chat" class="">
-    <input type="text" class="message">
+<form class="chat">
+    <input type="text" class="message" placeholder="Message">
     <input type="submit" class="btn btn-inverse" value="{% trans "Say" %}">
 </form>
 {% else %}
