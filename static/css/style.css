@@ -1,6 +1,7 @@
 
-html {height:100%;}  /* Firefox needs for background gradient to stretch */
-
+html {
+    height:100%; /* Firefox needs for background gradient to stretch */
+}
 
 body {
 
@@ -23,14 +24,19 @@ body {
     height:100px;
 }
 
+/* Main canvas */
 .main {
 
     width:1100px;
-    height:470px;
+    height:460px;
     margin:0 auto;
     border:5px solid rgb(0, 25, 0);
     border-radius:10px;
-    box-shadow: 0 0 60px 0px rgba(0,0,0,.9);
+    text-align:left;
+
+    -moz-box-shadow:    0 0 60px 0px rgba(0,0,0,.9);
+    -webkit-box-shadow: 0 0 60px 0px rgba(0,0,0,.9);
+    box-shadow:         0 0 60px 0px rgba(0,0,0,.9);
 
     /* Background gradients by http://www.colorzilla.com/gradient-editor/ */
     background: url('../img/tiles.png'), #006e2e; /* Old browsers */
@@ -41,4 +47,39 @@ body {
     background: url('../img/tiles.png'), -ms-radial-gradient(center, ellipse cover,  #006e2e 0%,#003315 100%); /* IE10+ */
     background: url('../img/tiles.png'), radial-gradient(ellipse at center,  #006e2e 0%,#003315 100%); /* W3C */
 
+}
+
+/* Game table */
+.game {
+
+    background:#006e2e;
+    display:inline-block;
+    width:200px;
+    height:340px;
+    margin:60px -8px 60px 60px;
+
+    border-radius: 10px;
+    border-style: inset;
+    border:2px solid rgba(0,0,0,.4);
+
+    -moz-box-shadow:    inset 0 0 30px rgba(0,0,0,.6);
+    -webkit-box-shadow: inset 0 0 30px rgba(0,0,0,.6);
+    box-shadow:         inset 0 0 30px rgba(0,0,0,.6);
+    z-index:2;
+
+}
+
+/* Game table shadow */
+.game:before {
+    content: " ";
+    width:200px;
+    height:340px;
+    border-radius: 10px;
+    display:block;
+    z-index:1;
+    box-shadow: 5px 5px 30px 0 rgba(0,0,0,1);
+}
+
+.game form {
+    display:none;
 }

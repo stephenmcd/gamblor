@@ -33,6 +33,7 @@ var socket, port = {{ SOCKETIO_PORT }};
 <img class="logo" src="{{ STATIC_URL }}img/logo.png">
 <div class="main">
 
+<!--
 {% for message in messages %}
 <p>{{ message }}</p>
 {% endfor %}
@@ -43,12 +44,14 @@ Logged in as {{ request.user }} with ${{ request.user.account.balance }} <a href
 <a href="{% url socialauth_begin "twitter" %}">Login via Twitter</a>
 {% endif %}
 
+-->
+
 {% for game in games %}
 <div class="game game-{{ game.name }}">
     <p class="players"></p>
     <a href="#">{{ game.name }}</a>
     {% if request.user.is_authenticated %}
-    <form>
+    <form class="form-inline">
         {{ game.form }}
         <input type="hidden" name="game" value="{{ game.name }}">
         <input type="submit" value="{% trans "Bet" %}">
