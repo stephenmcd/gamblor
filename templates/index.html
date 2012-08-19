@@ -21,6 +21,7 @@
 <script>
 var socket, port = {{ SOCKETIO_PORT }};
 </script>
+<script src="{{ STATIC_URL }}js/logo.js"></script>
 <script src="{{ STATIC_URL }}js/game.js"></script>
 {% for game in games %}
 <script src="{{ STATIC_URL }}js/games/{{ game.name }}.js"></script>
