@@ -16,7 +16,7 @@ from core.game import registry
 
 
 redis = Redis(connection_pool=ConnectionPool())
-USERS_KEY = "users"
+USERS_KEY = "gamblor-users"
 
 
 class GameNamespace(BaseNamespace, BroadcastMixin):
