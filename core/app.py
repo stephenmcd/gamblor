@@ -7,7 +7,6 @@ from django.contrib.auth import SESSION_KEY
 from django.contrib.auth.models import User
 from django.contrib.sessions.models import Session
 from django.utils.simplejson import loads, dumps
-from django.utils.translation import ugettext_lazy as _
 from socketio import socketio_manage
 from socketio.mixins import BroadcastMixin
 from socketio.namespace import BaseNamespace
@@ -90,7 +89,7 @@ class GameNamespace(BaseNamespace, BroadcastMixin):
         user = User.objects.get(id=self.user["id"])
         user.account.balance -= amount
         if user.account.balance < 0:
-            self.emit("notice", _("You don't have that amount to bet"))
+            self.emit("notice", "You don't have that amount to bet")
         else:
             game = registry[game_name]
             if game.bet(self, amount, bet_args):
