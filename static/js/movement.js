@@ -8,7 +8,7 @@ $(function() {
     $(document).keydown(function(e) {
 
         var avatar = $('#user-' + userID);
-        closeChat(avatar);
+
 
         if (avatar.length == 0) {
             return;
@@ -23,6 +23,7 @@ $(function() {
         }[e.keyCode];
 
         if (!move && dir) {
+            closeChat(avatar);
             move = setInterval(function() {
                 var pos = {
                     top: avatar.css('top'),
