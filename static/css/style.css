@@ -67,28 +67,31 @@ body {
     height:340px;
     margin:60px -8px 60px 60px;
 
-    border-radius: 10px;
+    border-radius: 5px;
     border-style: inset;
     border:2px solid rgba(0,0,0,.1);
 
-    -moz-box-shadow:    inset 0 0 20px rgba(0,0,0,.5);
-    -webkit-box-shadow: inset 0 0 20px rgba(0,0,0,.5);
-    box-shadow:         inset 0 0 20px rgba(0,0,0,.5);
+    -moz-box-shadow:    inset 0 0 10px rgba(0,0,0,.5);
+    -webkit-box-shadow: inset 0 0 10px rgba(0,0,0,.5);
+    box-shadow:         inset 0 0 10px rgba(0,0,0,.5);
     z-index:2;
 
 }
 
 /* Game table shadow */
 .game:before {
+
     content: " ";
     width:200px;
     height:340px;
-    border-radius: 10px;
+    border-radius: 5px;
     display:block;
     z-index:1;
+
     -moz-box-shadow:    5px 5px 30px 0 rgba(0,0,0,1);
     -webkit-box-shadow: 5px 5px 30px 0 rgba(0,0,0,1);
     box-shadow:         5px 5px 30px 0 rgba(0,0,0,1);
+
 }
 
 .game form {
@@ -96,10 +99,23 @@ body {
 }
 
 .footer {
+
+    text-align:left;
+    width:1050px;
     border-radius:5px;
-    margin-top:25px;
-    background: rgba(0,0,0,.15);
+    margin:25px auto;
     padding:15px;
+    padding-right:20px;
+    height:50px;
+
+    background: -moz-linear-gradient(top,  rgba(0,0,0,0.3) 0%, rgba(0,0,0,0) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.3)), color-stop(100%,rgba(0,0,0,0))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  rgba(0,0,0,0.3) 0%,rgba(0,0,0,0) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  rgba(0,0,0,0.3) 0%,rgba(0,0,0,0) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  rgba(0,0,0,0.3) 0%,rgba(0,0,0,0) 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  rgba(0,0,0,0.3) 0%,rgba(0,0,0,0) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4d000000', endColorstr='#1a000000',GradientType=0 ); /* IE6-9 */
+
 }
 
 .chat {
@@ -112,5 +128,32 @@ body {
 
 .chat .message {
     margin:3px;
-    width:400px;
+    width:300px;
+}
+
+
+.chip {
+
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    font-size: 20px;
+    color: white;
+    border:4px dashed white;
+    border-radius: 50px;
+    float: right;
+    font-weight: bold;
+    line-height: 70px;
+    margin-top:-57px;
+    text-shadow:none;
+    margin-left:5px;
+
+    -moz-transform:     perspective(100px) rotateX(60deg);
+    -webkit-transform:  perspective(100px) rotateX(60deg);
+    transform:          perspective(100px) rotateX(60deg);
+
+    -moz-box-shadow:    0px 5px 10px 0 rgba(0, 0, 0, .6);
+    -webkit-box-shadow: 0px 5px 10px 0 rgba(0, 0, 0, .6);
+    box-shadow:         0px 5px 10px 0 rgba(0, 0, 0, .6);
+
 }
