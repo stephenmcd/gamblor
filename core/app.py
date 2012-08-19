@@ -16,6 +16,7 @@ from core.game import registry
 
 
 redis = Redis(connection_pool=ConnectionPool())
+USERS_KEY = "users"
 
 
 class GameNamespace(BaseNamespace, BroadcastMixin):
@@ -40,17 +41,28 @@ class GameNamespace(BaseNamespace, BroadcastMixin):
         except (KeyError, ObjectDoesNotExist):
             self.user = None
         else:
-            self.user = {"name": user.username, "id": user.id}
+            self.user = {
+                "id": user.id,
+                "name": user.username,
+                "x": 880,
+                "y": 200,
+            }
             self.broadcast_event_not_me("join", self.user)
-            redis.sadd("users", self.user)
+            redis.hset(USERS_KEY, self.user["id"], self.user)
         # Send the current set of users to the new socket.
-        self.emit("users", list(redis.smembers("users")))
-        for game in registry.values():
-            self.emit("game_users", game.name, game.players.keys())
+        self.emit("users", [eval(u) for u in redis.hvals(USERS_KEY)])
+        # for game in registry.values():
+        #     self.emit("game_users", game.name, game.players.keys())
 
     def on_chat(self, message):
         if self.user:
             self.broadcast_event("chat", self.user, message)
+
+    def on_move(self, pos):
+        if self.user:
+            self.user.update(pos)
+            redis.hset(USERS_KEY, self.user["id"], self.user)
+            self.broadcast_event_not_me("move", self.user)
 
     def recv_disconnect(self):
         """
@@ -59,7 +71,7 @@ class GameNamespace(BaseNamespace, BroadcastMixin):
         """
         self.disconnect()
         if self.user:
-            redis.srem("users", self.user)
+            redis.hdel(USERS_KEY, self.user["id"])
             self.broadcast_event_not_me("leave", self.user)
 
     def on_bet(self, game_name, amount, bet_args):
